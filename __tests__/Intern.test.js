@@ -7,13 +7,15 @@ test('creates an intern object', () => {
     const expectedEmpId = 1;
     const expectedEmail = 'stan@something';
     const expectedschool = 'UofA';
+    const expectedRole = 'Intern';
 
     // Act: invoke the function "under test", capturing its return value
-    const intern = new Intern(expectedName, expectedEmpId, expectedEmail, expectedschool);
+    const intern = new Intern(expectedName, expectedEmpId, expectedEmail, expectedschool, expectedRole);
 
     // Assert: check (i.e. assert) that the expected behavior happened correctly
     expect(intern.name).toBe(expectedName);
     expect(intern.empId).toEqual(expectedEmpId);
     expect(intern.email).toEqual(expectedEmail);
     expect(intern.school).toEqual(expectedschool);
+    expect(intern.role).toEqual(expectedRole);
 });
