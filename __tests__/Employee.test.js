@@ -6,14 +6,23 @@ test('creates an employee object', () => {
     const expectedName = 'Stan';
     const expectedEmpId = 1;
     const expectedEmail = 'stan@something';
-    const expectedRole = 'Manager';
 
     // Act: invoke the function "under test", capturing its return value
-    const employee = new Employee(expectedName, expectedEmpId, expectedEmail, expectedRole);
+    const employee = new Employee(expectedName, expectedEmpId, expectedEmail);
 
     // Assert: check (i.e. assert) that the expected behavior happened correctly
     expect(employee.name).toBe(expectedName);
-    expect(employee.empId).toEqual(expectedEmpId);
-    expect(employee.email).toEqual(expectedEmail);
-    expect(employee.role).toEqual(expectedRole);
+    expect(employee.empId).toBe(expectedEmpId);
+    expect(employee.email).toBe(expectedEmail);
+});
+test('gets employee properties', () => {
+    const expectedName = 'Stan';
+    const expectedEmpId = 1;
+    const expectedEmail = 'stan@something';
+
+    const employee = new Employee(expectedName, expectedEmpId, expectedEmail);
+
+    expect(employee.getName()).toEqual(expectedName);
+    expect(employee.getEmpId()).toEqual(expectedEmpId);
+    expect(employee.getEmail()).toEqual(expectedEmail);
 });

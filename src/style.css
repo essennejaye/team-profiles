@@ -5,15 +5,18 @@ body {
 }
 
 .header {
-  font-size: 30px;
+  font-size: 45px;
   text-align: center;
   color: white;
   background-color: red;
 }
-
+.card-container {
+  display: flex;
+  justify-content: center;
+}
 .card {
   margin: 25px;
-  padding: 20px;
+  width: 13rem;
 }
 .card-body {
   border-radius: 5px;
@@ -21,5 +24,13 @@ body {
 .card-header {
   color: white;
   background-color: royalblue;
-  /* padding: 10px; */
+}
+.card-title {
+  font-size: 2.25rem;
+}
+.card-subtitle {
+  font-size: 1.5rem;
+}
+.list-group-item {
+  font-size: 16px;
 }
