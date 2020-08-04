@@ -16,7 +16,7 @@ body {
 }
 .card {
   margin: 25px;
-  width: 13rem;
+  width: 15rem;
 }
 .card-body {
   border-radius: 5px;
@@ -26,6 +26,7 @@ body {
   background-color: royalblue;
 }
 .card-title {
+  text-align: center;
   font-size: 2.25rem;
 }
 .card-subtitle {
