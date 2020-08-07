@@ -19,10 +19,12 @@ test('gets employee properties', () => {
     const expectedName = 'Stan';
     const expectedEmpId = 1;
     const expectedEmail = 'stan@something';
+    const expectedRole = "Employee";
 
     const employee = new Employee(expectedName, expectedEmpId, expectedEmail);
 
     expect(employee.getName()).toEqual(expectedName);
     expect(employee.getEmpId()).toEqual(expectedEmpId);
     expect(employee.getEmail()).toEqual(expectedEmail);
+    expect(employee.getRole()).toEqual(expectedRole);
 });

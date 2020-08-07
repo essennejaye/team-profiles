@@ -7,15 +7,25 @@ test('creates an engineer object', () => {
     const expectedEmpId = 1;
     const expectedEmail = 'stan@something';
     const expectedGithub = 'esselle';
-    const expectedRole = 'Engineer';
 
     // Act: invoke the function "under test", capturing its return value
-    const engineer = new Engineer(expectedName, expectedEmpId, expectedEmail, expectedGithub, expectedRole);
+    const engineer = new Engineer(expectedName, expectedEmpId, expectedEmail, expectedGithub);
 
     // Assert: check (i.e. assert) that the expected behavior happened correctly
     expect(engineer.name).toBe(expectedName);
     expect(engineer.empId).toEqual(expectedEmpId);
     expect(engineer.email).toEqual(expectedEmail);
     expect(engineer.github).toEqual(expectedGithub);
-    expect(engineer.role).toEqual(expectedRole);
+});
+test("get engineers's properties", () => {
+    const expectedName = 'Stan';
+    const expectedEmpId = 1;
+    const expectedEmail = 'stan@something';
+    const expectedGithub = 'esselle';
+    const expectedRole = 'Engineer';
+
+    const engineer = new Engineer(expectedName, expectedEmpId, expectedEmail, expectedGithub);
+
+    expect(engineer.getRole()).toEqual(expectedRole);
+    expect(engineer.getGithub()).toEqual(expectedGithub);
 });

@@ -13,12 +13,11 @@ body {
 /* styling for team profile cards */
 .card-container {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
 }
 .card {
   margin: 25px;
-  width: 20rem;
+  width: 15rem;
 }
 .card-body {
   border-radius: 5px;

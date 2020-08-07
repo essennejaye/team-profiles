@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "..\\projects\\jest-another-rpg"
+		},
+		{
+			"path": "..\\projects\\readme-pro"
+		},
+		{
+			"path": "..\\projects\\portfolio-generator"
+		}
+	],
+	"settings": {}
+}

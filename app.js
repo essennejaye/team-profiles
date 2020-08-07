@@ -1,13 +1,17 @@
+// modules needed 
 const inquirer = require('inquirer');
 const fs = require('fs');
 const path = require('path');
 
+// link to html template
 const generatePage = require('./src/page-template');
 
+// path names for fs writeFile
 const OUTPUT_DIR = path.resolve(__dirname, 'output');
 const outputPath = path.join(OUTPUT_DIR, 'index.html');
 const cssPath = path.join(OUTPUT_DIR, 'style.css')
 
+// link to employee objects
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
@@ -15,6 +19,13 @@ const Intern = require('./lib/Intern');
 const team = [];
 
 const promptManager = () => {
+
+    console.log(`
+    ================================
+    Welcome to your Team Profile App
+    ================================
+    `);
+
     return inquirer.prompt([
         {
             type: 'input',
@@ -32,10 +43,12 @@ const promptManager = () => {
             name: 'empId',
             message: 'What is your employee ID? Required!',
             validate: empIdInput => {
+                // validating employee id is a positive number
                 if (!Number.isInteger(empIdInput) || empIdInput < 1) {
                     console.log("Employee Id must be a valid positive number!");
                     return false;
                 }
+                // validating the employee number is not a duplicate
                 if (team.some((emp) => empIdInput === emp.getEmpId())) {
                     console.log('This id is already taken please choose another');
                     return false;
@@ -47,7 +60,8 @@ const promptManager = () => {
             type: 'input',
             name: 'email',
             message: 'What is your email address? Required!',
-            validate: function (email) {
+            validate: email => {
+                // validating email address is in correct format
                 valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
                 if (valid) {
                     return true;
@@ -77,7 +91,10 @@ const promptManager = () => {
         }
     ])
         .then(teamData => {
+            // create manager object
             team.push(new Manager(teamData.name, teamData.empId, teamData.email, teamData.office));
+            // if manager wishes to enter more employees continue with employee prompt
+            // otherwise exit prompt and process manager only
             if (teamData.confirmEnterEmp) {
                 return promptForTeam(teamData);
             } else {
@@ -106,7 +123,7 @@ const promptForTeam = teamData => {
             message: "What is your employee's name? Required!",
             validate: nameInput => {
                 if (!nameInput) {
-                    console.log("Please enter the team manager's name!");
+                    console.log("Please enter the employee's name!");
                     return false;
                 }
                 return true;
@@ -117,10 +134,12 @@ const promptForTeam = teamData => {
             name: 'empId',
             message: "What is your employee's ID? Required!",
             validate: empIdInput => {
+                // validating employee id is a positive number
                 if (!Number.isInteger(empIdInput) || empIdInput < 1) {
                     console.log("Employee Id must be a valid positive number!")
                     return false;
                 }
+                // validating the employee number is not a duplicate
                 if (team.some((emp) => empIdInput === emp.getEmpId())) {
                     console.log('This id is already taken please choose another');
                     return false;
@@ -132,7 +151,8 @@ const promptForTeam = teamData => {
             type: 'input',
             name: 'email',
             message: "What is your employee's email address? Required!",
-            validate: function (email) {
+            validate: email => {
+                // validating email address is in correct format
                 valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
                 if (valid) {
                     return true;
@@ -143,6 +163,7 @@ const promptForTeam = teamData => {
             }
         },
         {
+            // engineer specific prompt based on empType selected
             type: 'input',
             name: 'github',
             message: "What is the engineer's GitHub username? Required!",
@@ -156,6 +177,7 @@ const promptForTeam = teamData => {
             }
         },
         {
+            // intern specific prompt based on empType selected
             type: 'input',
             name: 'school',
             message: "What is the name of the intern's school? Required!",
@@ -175,12 +197,14 @@ const promptForTeam = teamData => {
             default: true
         }
     ])
+    // create new employee objects based on empType and push to team array 
         .then(teamData => {
             if (teamData.empType === 'Engineer') {
                 team.push(new Engineer(teamData.name, teamData.empId, teamData.email, teamData.github));
             } else {
                 team.push(new Intern(teamData.name, teamData.empId, teamData.email, teamData.school));
             }
+            // check if more team members should be added 
             if (teamData.confirmEnterEmp) {
                 return promptForTeam(teamData);
             } else {
@@ -191,10 +215,12 @@ const promptForTeam = teamData => {
 
 promptManager()
     .then((team) => {
+        // create folder if it doesn't already exist
         if (!fs.existsSync(OUTPUT_DIR)) {
             fs.mkdirSync(OUTPUT_DIR);
         }
         try {
+            // write html file to folder, copy css file to folder
             fs.writeFileSync(outputPath, generatePage(team), 'utf-8');
             fs.copyFileSync('./src/style.css', cssPath);
         } catch (err) {

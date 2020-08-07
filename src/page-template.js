@@ -1,5 +1,6 @@
 
 const generateEmp = eArr => {
+    
     var result = `
         ${eArr
             .filter((roles) => roles.getRole() == 'Manager')
@@ -28,7 +29,7 @@ const generateEmp = eArr => {
                     <div class="card" >
                         <div class="card-header">
                             <h5 class="card-title">${eEmp.getName()}</h5>
-                            <h6 class="card-subtitle mb-2"><i class="fa fa-file-image-o" aria-hidden="true"></i>  ${eEmp.getRole()}</h6>
+                            <h6 class="card-subtitle mb-2"><i class="fas fa-user-cog" aria-hidden="true"></i>  ${eEmp.getRole()}</h6>
                         </div>
                         <div class="card-body">
                             <ul class="list-group list-group-flush">
